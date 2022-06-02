@@ -78,8 +78,7 @@ class ElementInteractions(WebdriverManager):
         return len(cls.__get_desired_elements(element, get_all=True))
 
     @classmethod
-    def get_text(cls, element: str, get_all: bool = False, index: int = 0, timeout: int = BASE_TIMEOUT,
-                 scroll_options: {} = None):
+    def get_text(cls, element: str, get_all: bool = False, index: int = 0, timeout: int = BASE_TIMEOUT):
         """
         Get the text of element(s)
 
@@ -88,8 +87,6 @@ class ElementInteractions(WebdriverManager):
             get_all: Override to get all occurrences of the element
             index: Override to select a specific occurrence of the element
             timeout: Number of seconds to wait for the element
-            scroll_options: options to use for scrolling (see scroll_into_view method for examples)
-
         Returns:
             Text value(s) of the element(s)
         """
@@ -103,12 +100,47 @@ class ElementInteractions(WebdriverManager):
         else:
             return ele.text
 
+    @classmethod
+    def enter_text(cls, element: str, text: str, index: int = 0, timeout: int = BASE_TIMEOUT):
+        """
+        Enter text into an element
+
+        Args:
+            element: CSS selector or Xpath
+            text: text to enter
+            index: select specific occurrence of the element
+            timeout: Number of seconds to wait for the element
+
+        Returns:
+             none
+        """
+        ElementWait.wait_for_element_to_be_clickable(element, timeout)
+        ele = cls.__get_desired_elements(element=element, index=index)
+        ele.send_keys(text)
+
+    @classmethod
+    def is_displayed(cls, element: str, index: int = 0):
+        """
+        Check if an element is displayed on the page
+
+        Args:
+            element: CSS selector or Xpath
+            index: select specific occurrence of the element
+        Returns:
+             none
+        """
+        try:
+            ele = cls.__get_desired_elements(element=element, index=index)
+            return ele.is_displayed()
+        except IndexError:
+            return False
+
 
 class ElementWait(WebdriverManager):
     """Helper utility that waits for certain conditions to be met"""
 
     @classmethod
-    def wait_for_element_to_be_clickable(cls, element: str, timeout: int = BASE_TIMEOUT, ):
+    def wait_for_element_to_be_clickable(cls, element: str, timeout: int = BASE_TIMEOUT):
         """
         Wait for an element to be clickable
 
