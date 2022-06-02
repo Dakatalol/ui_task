@@ -8,12 +8,14 @@ def pytest_addoption(parser):
     """A list of additional command line arguments"""
     parser.addoption('--env', action='store', default='sit', help='Select the environment your test will run against')
     parser.addoption('--browser', action='store', default='chrome', help='Select browser configuration to use')
+    parser.addoption('--GH_TOKEN', action='store', default='', help='GH token configuration for FF webdriver')
 
 
 def pytest_configure(config):
     """Sets the command line arguments to configuration options"""
     os.environ['env'] = config.getoption('env')
     os.environ['browser'] = config.getoption('browser')
+    os.environ['GH_TOKEN'] = config.getoption('GH_TOKEN')
 
 
 def get_base_url():
