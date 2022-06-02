@@ -6,7 +6,8 @@ def test_login():
     LoginPage.set_user_name("standard_user")
     LoginPage.set_password("secret_sauce")
     LoginPage.click_login_button()
-    InventoryPage.get_item_by_number_and_add_to_cart(2)
+    InventoryPage.add_first_and_last_item_to_cart()
+    check = InventoryPage.is_item_in_cart("Sauce Labs Backpack")
     print("F")
 
 

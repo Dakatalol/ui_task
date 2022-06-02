@@ -6,24 +6,26 @@ class InventoryPage:
 
     # Xpath Selectors
     # Buttons
-    backpack_button = "//button[@id='add-to-cart-sauce-labs-backpack']"
-    bike_light_button = "//input[@id='login-button']"
-    bolt_t_shirt_button = ""
-    fleece_jacket_button = ""
-    labs_onesie_button = ""
-    red_t_shirt_button = ""
-
-    inventory_list = "//div[@class='inventory_list']"
-
-    all_inventory_buttons = "//button[@class='btn btn_primary btn_small btn_inventory']"
-    test_button = "//button[contains(text(),'Add')][2]"
+    list_of_buttons = "//button[@class='btn btn_primary btn_small btn_inventory']"
+    items_names_in_cart = "//div[@class='inventory_item_name']"
 
     # Getters
     @classmethod
-    def get_specific_item(cls, number):
-        return ElementInteractions.get_attribute(cls.inventory_list, attribute='innerHTML', index=number)
+    def get_number_of_items(cls):
+        return ElementInteractions.get_number_of_elements(cls.list_of_buttons)
 
     @classmethod
     def get_item_by_number_and_add_to_cart(cls, number):
-        desired_item_button = cls.all_inventory_buttons + "[{number}]".format(number=number)
-        ElementInteractions.click(cls.test_button)
+        ElementInteractions.click(cls.list_of_buttons, index=number)
+
+    # Actions
+    @classmethod
+    def add_first_and_last_item_to_cart(cls):
+        # adding the first item from the inventory
+        cls.get_item_by_number_and_add_to_cart(0)
+        # adding the last item from the inventory
+        cls.get_item_by_number_and_add_to_cart(cls.get_number_of_items() - 1)
+
+    @classmethod
+    def is_item_in_cart(cls, item):
+        return item in ElementInteractions.get_text(cls.items_names_in_cart, get_all=True)
