@@ -202,24 +202,3 @@ class ElementWait(WebdriverManager):
             locator_type = By.CSS_SELECTOR
 
         WebDriverWait(cls.driver, timeout).until(ec.visibility_of_element_located((locator_type, element)))
-
-    @classmethod
-    def wait_for_element_to_have_text(cls, element: str, text: str, timeout: int = BASE_TIMEOUT):
-        """
-        Wait for specific text to be present on an element
-
-        Args:
-            element: CSS selector or XPath
-            text: Text to wait for
-            timeout: Number of seconds to wait for the element
-
-        Returns:
-            None
-        """
-        if element.startswith('/'):
-            locator_type = By.XPATH
-        else:
-            locator_type = By.CSS_SELECTOR
-
-        WebDriverWait(cls.driver, timeout).until(ec.presence_of_element_located((locator_type, element)))
-        WebDriverWait(cls.driver, timeout).until(ec.text_to_be_present_in_element((locator_type, element), text))

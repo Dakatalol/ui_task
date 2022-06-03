@@ -32,7 +32,7 @@ class LoginPage:
 
     # Actions
     @classmethod
-    def login_standard_user(cls):
+    def user_login(cls, desired_user):
         raw_user_list = ElementInteractions.get_text(cls.username_list)
         raw_password = ElementInteractions.get_text(cls.password_list)
 
@@ -43,7 +43,7 @@ class LoginPage:
         password = raw_password.split('\n')
         password.pop(0)
 
-        cls.set_user_name([v for v in list_of_users if "standard" in v])
+        cls.set_user_name([v for v in list_of_users if desired_user in v])
         cls.set_password(password)
         cls.click_login_button()
 
