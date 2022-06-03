@@ -101,24 +101,6 @@ class ElementInteractions(WebdriverManager):
             return ele.text
 
     @classmethod
-    def enter_text(cls, element: str, text: str, index: int = 0, timeout: int = BASE_TIMEOUT):
-        """
-        Enter text into an element
-
-        Args:
-            element: CSS selector or Xpath
-            text: text to enter
-            index: select specific occurrence of the element
-            timeout: Number of seconds to wait for the element
-
-        Returns:
-             none
-        """
-        ElementWait.wait_for_element_to_be_clickable(element, timeout)
-        ele = cls.__get_desired_elements(element=element, index=index)
-        ele.send_keys(text)
-
-    @classmethod
     def is_displayed(cls, element: str, index: int = 0):
         """
         Check if an element is displayed on the page
