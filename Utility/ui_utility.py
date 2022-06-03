@@ -36,7 +36,7 @@ class ElementInteractions(WebdriverManager):
     @classmethod
     def enter_text(cls, element: str, characters: str, index: int = 0, timeout: int = BASE_TIMEOUT):
         """
-        Enter characters into an element
+        Enter text into an element
 
         Args:
             element: CSS selector or XPath
