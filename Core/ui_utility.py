@@ -1,7 +1,10 @@
+import time
+
 from selenium.webdriver.common.by import By
 from Core.webdriver_utility import WebdriverManager
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.support.select import Select
 
 BASE_TIMEOUT = 10
 
@@ -117,6 +120,48 @@ class ElementInteractions(WebdriverManager):
         except IndexError:
             return False
 
+    @classmethod
+    def select_dropdown_item(cls, element: str, dropdown_item: str, index: int = 0, timeout: int = BASE_TIMEOUT):
+        """
+        Select an item from a dropdown element
+
+        Args:
+            element: CSS selector or XPath
+            dropdown_item: Value to select
+            index: Override to select a specific occurrence of the element
+            timeout: Number of seconds to wait for the element
+        Returns:
+            None
+        """
+        ElementWait.wait_for_element_to_appear(element, timeout)
+        ele = cls.__get_desired_elements(element=element, index=index)
+        Select(ele).select_by_visible_text(dropdown_item)
+
+    @classmethod
+    def get_attribute(cls, element: str, attribute: str, get_all: bool = False, index: int = 0,
+                      timeout: int = BASE_TIMEOUT):
+        """
+        Get the value of attribute(s)
+
+        Args:
+            element: CSS selector or XPath
+            attribute: Name of the targeted attribute
+            get_all: Override to get all occurrences of the element
+            index: Override to select a specific occurrence of the element
+            timeout: Number of seconds to wait for the element
+        Returns:
+            Value(s) of the targeted attribute(s)
+        """
+        ElementWait.wait_for_element_to_appear(element, timeout)
+        ele = cls.__get_desired_elements(element=element, index=index, get_all=get_all)
+        if get_all:
+            all_elements = []
+            for el in ele:
+                all_elements.append(el.get_attribute(attribute))
+            return all_elements
+        else:
+            return ele.get_attribute(attribute)
+
 
 class ElementWait(WebdriverManager):
     """Helper utility that waits for certain conditions to be met"""
@@ -157,3 +202,24 @@ class ElementWait(WebdriverManager):
             locator_type = By.CSS_SELECTOR
 
         WebDriverWait(cls.driver, timeout).until(ec.visibility_of_element_located((locator_type, element)))
+
+    @classmethod
+    def wait_for_element_to_have_text(cls, element: str, text: str, timeout: int = BASE_TIMEOUT):
+        """
+        Wait for specific text to be present on an element
+
+        Args:
+            element: CSS selector or XPath
+            text: Text to wait for
+            timeout: Number of seconds to wait for the element
+
+        Returns:
+            None
+        """
+        if element.startswith('/'):
+            locator_type = By.XPATH
+        else:
+            locator_type = By.CSS_SELECTOR
+
+        WebDriverWait(cls.driver, timeout).until(ec.presence_of_element_located((locator_type, element)))
+        WebDriverWait(cls.driver, timeout).until(ec.text_to_be_present_in_element((locator_type, element), text))
