@@ -156,7 +156,7 @@ share/python-wheels/
 MANIFEST
 drivers/
 results/
-core/__init__.py
+Utility/__init__.py
 pages/__init__.py
 tests/__init__.py
 utils/__init__.py

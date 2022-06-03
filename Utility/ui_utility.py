@@ -1,7 +1,7 @@
 import time
 
 from selenium.webdriver.common.by import By
-from Core.webdriver_utility import WebdriverManager
+from Utility.webdriver_utility import WebdriverManager
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.select import Select

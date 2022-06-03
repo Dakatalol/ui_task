@@ -1,4 +1,4 @@
-from Core.ui_utility import ElementInteractions
+from Utility.ui_utility import ElementInteractions
 
 
 class LoginPage:

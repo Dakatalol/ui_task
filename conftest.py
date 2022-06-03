@@ -1,7 +1,7 @@
 import pytest
 import os
 
-from Core.webdriver_utility import WebdriverManager
+from Utility.webdriver_utility import WebdriverManager
 
 
 def pytest_addoption(parser):
