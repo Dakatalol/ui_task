@@ -19,11 +19,11 @@ class LoginPage:
     # Setters
     @classmethod
     def set_user_name(cls, value):
-        ElementInteractions.enter_characters(cls.username_text_box, value)
+        ElementInteractions.enter_text(cls.username_text_box, value)
 
     @classmethod
     def set_password(cls, value):
-        ElementInteractions.enter_characters(cls.password_text_box, value)
+        ElementInteractions.enter_text(cls.password_text_box, value)
 
     # Clicks
     @classmethod

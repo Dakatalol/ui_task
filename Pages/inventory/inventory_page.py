@@ -75,9 +75,9 @@ class InventoryPage:
 
     @classmethod
     def fill_shipment_info(cls):
-        ElementInteractions.enter_characters(cls.first_name_text_box, "Peshko")
-        ElementInteractions.enter_characters(cls.last_name_text_box, "Peshkov")
-        ElementInteractions.enter_characters(cls.postal_code_text_box, "7000")
+        ElementInteractions.enter_text(cls.first_name_text_box, "Peshko")
+        ElementInteractions.enter_text(cls.last_name_text_box, "Peshkov")
+        ElementInteractions.enter_text(cls.postal_code_text_box, "7000")
 
     @classmethod
     def continue_to_checkout_and_finish_order(cls):

@@ -34,7 +34,7 @@ class ElementInteractions(WebdriverManager):
             return elements[index]
 
     @classmethod
-    def enter_characters(cls, element: str, characters: str, index: int = 0, timeout: int = BASE_TIMEOUT):
+    def enter_text(cls, element: str, characters: str, index: int = 0, timeout: int = BASE_TIMEOUT):
         """
         Enter characters into an element
 
