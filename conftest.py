@@ -29,6 +29,22 @@ def get_base_url():
     return f"https://saucedemo.com/"
 
 
+@pytest.mark.hookwrapper
+def pytest_runtest_makereport(item, call):
+    pytest_html = item.config.pluginmanager.getplugin('html')
+    outcome = yield
+    report = outcome.get_result()
+    extra = getattr(report, 'extra', [])
+    if report.when == 'call':
+        # always add url to report
+        extra.append(pytest_html.extras.url(get_base_url()))
+        report.extra = extra
+
+
+def pytest_html_report_title(report):
+    report.title = f"Endava test report"
+
+
 @pytest.fixture(autouse=True)
 def browser_init():
     """
