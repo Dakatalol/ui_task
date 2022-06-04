@@ -38,8 +38,9 @@ class LoginPage:
 
         # Splitting users into list of strings based on new lines(\n)
         list_of_users = raw_user_list.split('\n')
-        # removing the first item that is not user
+        # Removing the first item that is not user
         list_of_users.pop(0)
+        # Getting the password
         password = raw_password.split('\n')
         password.pop(0)
 
