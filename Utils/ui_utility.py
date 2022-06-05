@@ -137,31 +137,6 @@ class ElementInteractions(WebdriverManager):
         ele = cls.__get_desired_elements(element=element, index=index)
         Select(ele).select_by_visible_text(dropdown_item)
 
-    @classmethod
-    def get_attribute(cls, element: str, attribute: str, get_all: bool = False, index: int = 0,
-                      timeout: int = BASE_TIMEOUT):
-        """
-        Get the value of attribute(s)
-
-        Args:
-            element: CSS selector or XPath
-            attribute: Name of the targeted attribute
-            get_all: Override to get all occurrences of the element
-            index: Override to select a specific occurrence of the element
-            timeout: Number of seconds to wait for the element
-        Returns:
-            Value(s) of the targeted attribute(s)
-        """
-        ElementWait.wait_for_element_to_appear(element, timeout)
-        ele = cls.__get_desired_elements(element=element, index=index, get_all=get_all)
-        if get_all:
-            all_elements = []
-            for el in ele:
-                all_elements.append(el.get_attribute(attribute))
-            return all_elements
-        else:
-            return ele.get_attribute(attribute)
-
 
 class ElementWait(WebdriverManager):
     """Helper utility that waits for certain conditions to be met"""
