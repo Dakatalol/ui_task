@@ -30,7 +30,7 @@ class InventoryPage:
     price_list = "//div[@class='inventory_item_price']"
 
     # Selectors
-    select_product_list = "//select[@class='product_sort_container']"
+    select_product_soring_list = "//select[@class='product_sort_container']"
 
     # Getters
     @classmethod
@@ -104,7 +104,7 @@ class InventoryPage:
 
     @classmethod
     def select_descending_price_ordering(cls):
-        ElementInteractions.select_dropdown_item(cls.select_product_list, "Price (high to low)")
+        ElementInteractions.select_dropdown_item(cls.select_product_soring_list, "Price (high to low)")
 
     @classmethod
     def is_prices_listed_descending(cls):
