@@ -1,6 +1,6 @@
 import re
 
-from Utility.ui_utility import ElementInteractions, ElementWait
+from Utils.ui_utility import ElementInteractions, ElementWait
 
 
 class InventoryPage:
